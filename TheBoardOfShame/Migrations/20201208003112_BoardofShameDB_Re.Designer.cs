@@ -9,8 +9,8 @@ using TheBoardOfShame.Model;
 namespace TheBoardOfShame.Migrations
 {
     [DbContext(typeof(Database))]
-    [Migration("20201201222818_BoardofShameDB")]
-    partial class BoardofShameDB
+    [Migration("20201208003112_BoardofShameDB_Re")]
+    partial class BoardofShameDB_Re
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
