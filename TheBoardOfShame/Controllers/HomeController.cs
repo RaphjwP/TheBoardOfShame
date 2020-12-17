@@ -21,6 +21,12 @@ namespace TheBoardOfShame.Controller
             return View();
         }
 
+
+        public HomeController(Database database)
+        {
+            _database = database;
+        }
+
         public IActionResult ValidateUser(User user)
         {
             return View("MainPage");
@@ -40,6 +46,31 @@ namespace TheBoardOfShame.Controller
         {
             var newChore = chore;
             _database.Chore.Add(newChore);
+            _database.SaveChanges();
+
+            return View("MainPage");
+        }
+
+        [HttpGet]
+        [Route("Home/Edit/{id}")]
+        public IActionResult EditChores(int id)
+        {
+            var chore = _database.Chore.Find(id);
+
+            return View(chore);
+        }
+
+        [HttpPost]
+        [Route("Home/Edit/{id}")]
+        public IActionResult EditChores(Chore chore)
+        {
+            var choreToChange = _database.Chore.Find(chore.Id);
+            
+            choreToChange.ChoreDescription = chore.ChoreDescription;
+            choreToChange.ChoreType = chore.ChoreType;
+            choreToChange.ChoreWeight = chore.ChoreWeight;
+
+            _database.Chore.Update(choreToChange);
             _database.SaveChanges();
 
             return View("MainPage");
