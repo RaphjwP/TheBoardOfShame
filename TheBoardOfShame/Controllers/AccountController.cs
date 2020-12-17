@@ -32,6 +32,7 @@ namespace TheBoardOfShame.Controllers
             return View();
         }
 
+
         public async Task<IActionResult> Logout()
         {
 

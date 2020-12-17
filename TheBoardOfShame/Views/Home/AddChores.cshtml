@@ -1,16 +1,20 @@
 ﻿@model TheBoardOfShame.Model.Chore
 
-
-<html xmlns="http://www.w3.org/1999/xhtml%22%3E">
+@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+<html xmlns="http://www.w3.org/1999/xhtml">
 <head>
     <title></title>
 </head>
 <body>
     <p>Adding New Chores</p>
 
-    <div>
+    <div class="row">
         <div class="col-md-12">
-            <form method="post" asp-action="EditChores">
+            <form method="post" asp-action="AddChores">
                 <div asp-validation-summary="All" class="text-danger"></div>
                 <div class="form-group">
                     <label asp-for="ChoreDescription"></label>
@@ -27,10 +31,11 @@
                     <input asp-for="ChoreWeight" class="form-control" />
                     <span asp-validation-for="ChoreWeight" class="text-danger"></span>
                 </div>
-                <button type="submit" class="btn btn-primary">Register</button>
+                <button type="submit" class="btn btn-primary">Add A New Chore</button>
             </form>
         </div>
     </div>
+
 
 </body>
 </html>

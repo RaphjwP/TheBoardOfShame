@@ -4,23 +4,24 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using TheBoardOfShame.Model;
+using TheBoardOfShame.ViewModels;
 
 namespace TheBoardOfShame.Controller
 {
     public class HomeController : Microsoft.AspNetCore.Mvc.Controller
     {
-
         private Database _database;
-        public IActionResult Index()
-        {
-            return View();
-        }
-
 
         public HomeController(Database database)
         {
             _database = database;
         }
+
+        public IActionResult Index()
+        {
+            return View();
+        }
+
 
         public IActionResult ValidateUser(User user)
         {
@@ -28,6 +29,34 @@ namespace TheBoardOfShame.Controller
         }
 
         [HttpGet]
+        [Route("Home/Add")]
+        public IActionResult AddChores()
+        {
+
+            return View();
+        }
+
+        [HttpPost]
+        [Route("Home/Add")]
+        public IActionResult AddChores(Chore chore)
+        {
+            var newChore = chore;
+            _database.Chore.Add(newChore);
+            _database.SaveChanges();
+
+            return View("MainPage");
+        }
+
+
+        public IActionResult MainPage()
+        {
+            ChoreViewModel choreviewmodel = new ChoreViewModel();
+            choreviewmodel.Chores = _database.Chore;
+            choreviewmodel.Users = _database.Users;
+
+            return View(choreviewmodel);
+        }
+
         [Route("Home/Edit/{id}")]
         public IActionResult EditChores(int id)
         {
