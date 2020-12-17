@@ -27,6 +27,7 @@ namespace TheBoardOfShame.Controller
             return View("MainPage");
         }
 
+        [HttpGet]
         [Route("Home/Edit/{id}")]
         public IActionResult EditChores(int id)
         {
@@ -36,10 +37,11 @@ namespace TheBoardOfShame.Controller
         }
 
         [HttpPost]
+        [Route("Home/Edit/{id}")]
         public IActionResult EditChores(Chore chore)
         {
             var choreToChange = _database.Chore.Find(chore.Id);
-            a
+            
             choreToChange.ChoreDescription = chore.ChoreDescription;
             choreToChange.ChoreType = chore.ChoreType;
             choreToChange.ChoreWeight = chore.ChoreWeight;
