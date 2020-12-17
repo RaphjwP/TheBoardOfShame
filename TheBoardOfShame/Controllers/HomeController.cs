@@ -51,5 +51,32 @@ namespace TheBoardOfShame.Controller
 
             return View("MainPage");
         }
+
+        [Route("Home/Details/{id}")]
+        public IActionResult GiveDetails(int id)
+        {
+            var chore = _database.Chore.Find(id);
+
+            return View(chore);
+        }
+
+        [HttpGet]
+        [Route("Home/Delete/{id}")]
+        public IActionResult DeleteChores(int id)
+        {
+            var chore = _database.Chore.Find(id);
+
+            return View(chore);
+        }
+
+        [HttpPost]
+        [Route("Home/Delete/{id}")]
+        public IActionResult DeleteChores(Chore chore)
+        {
+            _database.Chore.Remove(chore);
+            _database.SaveChanges();
+
+            return View("MainPage");
+        }
     }
 }

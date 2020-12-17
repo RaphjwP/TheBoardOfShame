@@ -1,0 +1,22 @@
+﻿@model TheBoardOfShame.Model.Chore
+<html xmlns="http://www.w3.org/1999/xhtml%22%3E">
+<head>
+    <title></title>
+</head>
+<body>
+    <div>
+        <p>Showing the details of the chore </p>
+
+        <p>Name of Chore: @Model.ChoreType</p>
+
+        <p>Description of Chore: @Model.ChoreDescription</p>
+
+        <p>Chore Weighting : @Model.ChoreWeight</p>
+    </div>
+
+    <form method="post" asp-action="DeleteChores">
+        <button type="submit" class="btn btn-danger">Confirm Delete</button>
+    </form>
+
+</body>
+</html>
