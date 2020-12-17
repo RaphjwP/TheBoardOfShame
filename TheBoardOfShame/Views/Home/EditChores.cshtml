@@ -1,0 +1,35 @@
+﻿@model TheBoardOfShame.Model.Chore
+
+<html xmlns="http://www.w3.org/1999/xhtml%22%3E">
+<head>
+    <title></title>
+</head>
+<body>
+    <p>Adding New Chores</p>
+
+    <div>
+        <div class="col-md-12">
+            <form method="post" asp-action="EditChores">
+                <div asp-validation-summary="All" class="text-danger"></div>
+                <div class="form-group">
+                    <label asp-for="ChoreDescription"></label>
+                    <input asp-for="ChoreDescription" class="form-control" />
+                    <span asp-validation-for="ChoreDescription" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="ChoreType"></label>
+                    <input asp-for="ChoreType" class="form-control" />
+                    <span asp-validation-for="ChoreType" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="ChoreWeight"></label>
+                    <input asp-for="ChoreWeight" class="form-control" />
+                    <span asp-validation-for="ChoreWeight" class="text-danger"></span>
+                </div>
+                <button type="submit" class="btn btn-primary">Register</button>
+            </form>
+        </div>
+    </div>
+
+</body>
+</html>

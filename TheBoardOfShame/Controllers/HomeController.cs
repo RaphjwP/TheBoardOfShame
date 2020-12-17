@@ -23,11 +23,6 @@ namespace TheBoardOfShame.Controller
         }
 
 
-        public HomeController(Database database)
-        {
-            _database = database;
-        }
-
         public IActionResult ValidateUser(User user)
         {
             return View("MainPage");
