@@ -1,5 +1,30 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
-@{
-}
+﻿@model IEnumerable<TheBoardOfShame.ViewModels.ChoreViewModel>
+
+<html>
+<body>
+<p class="alert alert-primary">The Chore Board</p>
+
+<table class="table table-striped">
+        <thead>
+        <tr>
+            @foreach (var user in Model)
+            {
+                <tr>
+                    <td>@user.User.FirstName</td>
+                </tr>
+            }
+
+        </tr>
+        </thead>
+        <tbody>
+        @foreach (var chore in Model)
+        {
+            <tr>
+                <td>@chore.Chore.ChoreType</td>
+            </tr>
+        }
+        </tbody>
+    </table>
+
+</body>
+</html>

@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using TheBoardOfShame.Model;
+using TheBoardOfShame.ViewModels;
 
 namespace TheBoardOfShame.Controller
 {
@@ -17,6 +18,13 @@ namespace TheBoardOfShame.Controller
         public IActionResult ValidateUser(User user)
         {
             return View("MainPage");
+        }
+
+        public IActionResult MainPage()
+        {
+            ChoreViewModel choreviewmodel = new ChoreViewModel();
+            choreviewmodel.Chore = _database;
+            return View(choreviewmodel);
         }
     }
 }
