@@ -9,6 +9,12 @@ namespace TheBoardOfShame.Model
     {
         public int Id { get; set; }
 
+        public string ChoreType { get; set; }
+
+        public string ChoreDescription { get; set; }
+
+        public int ChoreWeight { get; set; }
+
         public List<User> Users { get; set; }
     }
 }
