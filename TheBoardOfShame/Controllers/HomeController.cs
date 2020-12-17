@@ -9,6 +9,13 @@ namespace TheBoardOfShame.Controller
 {
     public class HomeController : Microsoft.AspNetCore.Mvc.Controller
     {
+        private Database _database;
+
+        public HomeController(Database database)
+        {
+            _database = database;
+        }
+
         public IActionResult Index()
         {
             return View();
@@ -16,6 +23,25 @@ namespace TheBoardOfShame.Controller
 
         public IActionResult ValidateUser(User user)
         {
+            return View("MainPage");
+        }
+
+        [HttpGet]
+        [Route("Home/Add")]
+        public IActionResult AddChores()
+        {
+
+            return View();
+        }
+
+        [HttpPost]
+        [Route("Home/Add")]
+        public IActionResult AddChores(Chore chore)
+        {
+            var newChore = chore;
+            _database.Chore.Add(newChore);
+            _database.SaveChanges();
+
             return View("MainPage");
         }
     }
