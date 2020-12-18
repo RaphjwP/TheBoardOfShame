@@ -17,6 +17,7 @@ namespace TheBoardOfShame.ViewModels
         //type IEnumberable allows iteration over all of the following objects
         public IEnumerable<Chore> Chores { get; set; }
         public IEnumerable<User> Users { get; set; }
+        public IEnumerable<Score> Scores { get; set; }
 
         public WeatherViewModel WeatherViewModel { get; set; }
     }

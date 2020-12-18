@@ -53,10 +53,10 @@
             @foreach (var user in Model.Users)
             {
                 <tr>
-                    <td><a asp-action="GiveUsers">@user.FirstName</a></td>
-                    @foreach (var user1 in Model.Users)
+                    <td><a asp-action="GiveUsers" asp-route-Id="@user.Id">@user.FirstName</a></td>
+                    @foreach (var usera in user.Scores)
                     {
-                        <td>@user1.LastName</td>
+                        <td>@usera.ChoreScore</td>
                     }
                 </tr>
             }

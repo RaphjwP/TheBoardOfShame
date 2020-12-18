@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using TheBoardOfShame.Model;
 using TheBoardOfShame.Models;
 using TheBoardOfShame.ViewModels;
@@ -66,7 +67,13 @@ namespace TheBoardOfShame.Controller
         {
             ChoreViewModel choreviewmodel = new ChoreViewModel();
             choreviewmodel.Chores = _database.Chore;
-            choreviewmodel.Users = _database.Users;
+            var users = _database.Users;
+            foreach (var user in users)
+            {
+                user.Scores = _database.Scores.Where(s => s.User.Id == user.Id).ToList();
+            }
+            choreviewmodel.Users = users;
+            
 
             return View(choreviewmodel);
         }
@@ -103,7 +110,7 @@ namespace TheBoardOfShame.Controller
             return View(chore);
         }
         [HttpGet]
-        [Route("Home/Details/{id}")]
+        [Route("Home/GiveUsers/{id}")]
         public IActionResult GiveUsers(int id)
         {
             var user = _database.Users.Find(id);

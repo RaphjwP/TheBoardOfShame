@@ -23,9 +23,9 @@ namespace TheBoardOfShame.Model
         public DbSet<User> Users { get; set; }
 
         public DbSet<Chore> Chore { get; set; }
-
         public DbSet<Score> Scores { get; set; }
 
-
+ 
+        
     }
 }

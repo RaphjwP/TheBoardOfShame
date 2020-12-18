@@ -24,7 +24,8 @@ namespace TheBoardOfShame.Model
         public int Age { get; set; }
 
         public List<Chore> Chores { get; set; }
-        public List<Score> Scores { get; set; }
+        public IEnumerable<Score> Scores { get; set; }
+
         [Required(ErrorMessage = "Please enter your Password")]
         public string Password { get; set; }
 
