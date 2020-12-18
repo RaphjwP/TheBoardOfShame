@@ -18,8 +18,6 @@ namespace TheBoardOfShame.ViewModels
         public IEnumerable<Chore> Chores { get; set; }
         public IEnumerable<User> Users { get; set; }
 
-        
-
-        
+        public WeatherViewModel WeatherViewModel { get; set; }
     }
 }

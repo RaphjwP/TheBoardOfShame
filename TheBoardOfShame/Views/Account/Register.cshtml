@@ -1,31 +1,30 @@
-﻿@model TheBoardOfShame.ViewModels.RegisterViewModel
-
-@{
-    ViewBag.Title = "User Registration";
+﻿@{
+    ViewData["Title"] = "Sign Up page";
 }
 
-<h1>User Registration</h1>
-
-<div class="row">
-    <div class="col-md-12">
-        <form method="post">
-            <div asp-validation-summary="All" class="text-danger"></div>
-            <div class="form-group">
-                <label asp-for="Email"></label>
-                <input asp-for="Email" class="form-control" />
-                <span asp-validation-for="Email" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Password"></label>
-                <input asp-for="Password" class="form-control" />
-                <span asp-validation-for="Password" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="ConfirmPassword"></label>
-                <input asp-for="ConfirmPassword" class="form-control" />
-                <span asp-validation-for="ConfirmPassword" class="text-danger"></span>
-            </div>
-            <button type="submit" class="btn btn-primary">Register</button>
+<html>
+<head>
+    <title>Sign Up</title>
+    <link rel="stylesheet" type="text/css" href="/css/site.css"/>
+    <body class="bodySignIn">
+    <div class="signIn">
+        <img src="~/signUpDude.png" class="dudes">
+        <h1>
+            SignUp
+        </h1>
+        <form>
+            <p>
+                Username
+            </p>
+            <input type="text" name="" placeholder="Enter Username">
+            <p>
+                Password
+            </p>
+            <input type="password" name="" placeholder="Enter Password">
+            <input type="password" name="" placeholder="Confirm Password">
+            <input type="submit" name="" value="Confirm">
         </form>
     </div>
-</div>
+    </body>
+</head>
+</html>

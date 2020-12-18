@@ -5,27 +5,29 @@ using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Security.Cryptography.Xml;
 using System.Threading.Tasks;
+using Newtonsoft.Json;
 using TheBoardOfShame.Models;
 
 namespace TheBoardOfShame.ViewModels
 {
     public class WeatherViewModel
     {
-        private Weather _weather;
+        public WeatherAPI.Weather Weather;
         private const string URL =
-            "http://http://api.aerisapi.com/observations/43.4675,-79.6877?query&client_id=wztUyr2pGuOQTfc2iXxem&client_secret=5IpLXXTRTrCmr75ug3FegawR7PGKG5dqQzC2z4Ru";
+            "http://api.openweathermap.org/data/2.5/weather?q=Oakville&appid=0257b00ab1bf0040d1e0d2a255b365a5";
 
-        private string urlClient_id = "wztUyr2pGuOQTfc2iXxem";
-        private string urlClient_Secret = "5IpLXXTRTrCmr75ug3FegawR7PGKG5dqQzC2z4Ru";
         private string oakVille_lat = "43.4675";
         private string oakVille_long = "-79.6877";
 
+        public string currentLocation;
+
         public WeatherViewModel()
         {
-            _weather = new Weather();
+            Weather = new WeatherAPI.Weather();
+            ApiCallAsync();
         }
 
-        public void ApiCall()
+        public async Task ApiCallAsync()
         {
             HttpClient client = new HttpClient();
             client.BaseAddress = new Uri(URL);
@@ -36,19 +38,21 @@ namespace TheBoardOfShame.ViewModels
 
             // List data response.
             HttpResponseMessage
-                response = client.GetAsync("")
+                response = client.GetAsync(URL)
                     .Result; // Blocking call! Program will wait here until a response is received or a timeout occurs.
             if (response.IsSuccessStatusCode)
             {
                 // Parse the response body.
-                var weatherObject =
-                    response.Content.ReadAsAsync<IEnumerable<Weather>>()
-                        .Result; //Make sure to add a reference to System.Net.Http.Formatting.dll
-                foreach (var weather in weatherObject)
+                var responseObject = await client.GetStringAsync(URL);
+                //var json = JsonConvert.SerializeObject(responseObject);
+                WeatherAPI.Root r = JsonConvert.DeserializeObject<WeatherAPI.Root>(responseObject, new JsonSerializerSettings
                 {
-                    Console.WriteLine("{0}", weather.TempC);
-                    Console.WriteLine(weather.Latitude);
-                }
+                    NullValueHandling = NullValueHandling.Ignore
+                });
+
+                Weather.description = r.weather.First().description;
+                currentLocation = r.name;
+
             }
             else
             {

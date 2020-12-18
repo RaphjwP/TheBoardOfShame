@@ -12,8 +12,9 @@ namespace TheBoardOfShame.Controller
     public class HomeController : Microsoft.AspNetCore.Mvc.Controller
     {
         private Database _database;
-        private WeatherViewModel _weatherViewModel;
+        private static WeatherViewModel _weatherViewModel;
 
+        // Database Init
         public HomeController(Database database)
         {
             _database = database;
@@ -26,11 +27,19 @@ namespace TheBoardOfShame.Controller
         }
 
 
+        // This is to test Weather API calls
+        public IActionResult WeatherView()
+        {
+            return View("DisplayWeather",_weatherViewModel);
+        }
+
+        // Validate user is called in Login
         public IActionResult ValidateUser(User user)
         {
             return View("MainPage");
         }
 
+        // Get for Add View
         [HttpGet]
         [Route("Home/Add")]
         public IActionResult AddChores()
@@ -39,6 +48,7 @@ namespace TheBoardOfShame.Controller
             return View();
         }
 
+        // Post action for Add view with adding to DB
         [HttpPost]
         [Route("Home/Add")]
         public IActionResult AddChores(Chore chore)
@@ -51,6 +61,7 @@ namespace TheBoardOfShame.Controller
         }
 
 
+        // Navigation to Main Page
         public IActionResult MainPage()
         {
             ChoreViewModel choreviewmodel = new ChoreViewModel();

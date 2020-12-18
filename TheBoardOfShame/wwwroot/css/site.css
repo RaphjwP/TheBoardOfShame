@@ -1,0 +1,121 @@
+﻿h1 {
+    margin: 0;
+    padding: 0 0 20px;
+    text-align: center;
+    font-size: 34px;
+}
+
+.bodyLogin {
+    margin: 0;
+    padding: 0;
+    background: url('../bg3.jpg');
+    background-size: cover;
+    font-family: Calibri;
+}
+
+.login{
+    width: 420px;
+    height: 400px;
+    background: #000;
+    color: #2a00ff;
+    top: 50%;
+    left: 50%;
+    position: absolute;
+    transform: translate(-50%, -50%);
+    box-sizing: border-box;
+    padding: 70px 30px;
+}
+
+.login p{
+    margin: 0;
+    padding: 0;
+    font-weight: bold;
+}
+
+.login input{
+    width:100%;
+    margin-bottom: 20px;
+}
+
+.login input[type="text"], input[type="password"]{
+    border: none;
+    border-bottom: 1px solid #fff;
+    background: transparent;
+    outline: none;
+    height: 40px;
+    color: white;
+}
+
+.login input[type="submit"] {
+    color: #a5a0a0;
+    font-weight: bold;
+    font-size: 20px;
+    border: none;
+    background: #2a00ff;
+    height: 40px;
+    border-radius: 40px;
+}
+
+
+.dudes {
+    width: 100px;
+    height: 100px;
+    position: absolute;
+    top: -50px;
+    left: calc(50% - 50px);
+}
+
+
+.bodySignIn {
+    margin: 0;
+    padding: 0;
+    background: url('../bg2.jpg');
+    background-size: cover;
+    font-family: Calibri;
+}
+
+.signIn {
+    width: 420px;
+    height: 460px;
+    background: #000;
+    color: #2a00ff;
+    top: 50%;
+    left: 50%;
+    position: absolute;
+    transform: translate(-50%, -50%);
+    box-sizing: border-box;
+    padding: 70px 30px;
+    border-radius: 10px;
+}
+
+.signIn p {
+    margin: 0;
+    padding: 0;
+    font-weight: bold;
+}
+
+.signIn input {
+    width: 100%;
+    margin-bottom: 20px;
+}
+
+.signIn input[type="text"], input[type="password"] {
+    border: none;
+    border-bottom: 1px solid #fff;
+    background: transparent;
+    outline: none;
+    height: 40px;
+    color: white;
+}
+
+.signIn input[type="submit"] {
+    color: #a5a0a0;
+    font-weight: bold;
+    font-size: 20px;
+    border: none;
+    background: #2a00ff;
+    height: 40px;
+    border-radius: 40px;
+}
+
+
