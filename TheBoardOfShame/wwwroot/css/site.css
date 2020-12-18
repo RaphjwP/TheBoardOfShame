@@ -1,4 +1,4 @@
-﻿h1 {
+﻿.loginSignUpH1{
     margin: 0;
     padding: 0 0 20px;
     text-align: center;
@@ -13,7 +13,7 @@
     font-family: Calibri;
 }
 
-.login{
+.login {
     width: 420px;
     height: 400px;
     background: #000;
@@ -24,6 +24,7 @@
     transform: translate(-50%, -50%);
     box-sizing: border-box;
     padding: 70px 30px;
+    border-radius: 10px;
 }
 
 .login p{
@@ -117,5 +118,4 @@
     height: 40px;
     border-radius: 40px;
 }
-
 

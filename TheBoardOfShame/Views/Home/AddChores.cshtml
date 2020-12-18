@@ -9,33 +9,35 @@
 <head>
     <title></title>
 </head>
-<body>
-    <p>Adding New Chores</p>
+<link rel="stylesheet" type="text/css" href="/css/add.css" />
+<body class="addBG">
+    <p class="aeTitle">Adding New Chores</p>
 
-    <div class="row">
-        <div class="col-md-12">
-            <form method="post" asp-action="AddChores">
-                <div asp-validation-summary="All" class="text-danger"></div>
-                <div class="form-group">
-                    <label asp-for="ChoreDescription"></label>
-                    <input asp-for="ChoreDescription" class="form-control" />
-                    <span asp-validation-for="ChoreDescription" class="text-danger"></span>
-                </div>
-                <div class="form-group">
-                    <label asp-for="ChoreType"></label>
-                    <input asp-for="ChoreType" class="form-control" />
-                    <span asp-validation-for="ChoreType" class="text-danger"></span>
-                </div>
-                <div class="form-group">
-                    <label asp-for="ChoreWeight"></label>
-                    <input asp-for="ChoreWeight" class="form-control" />
-                    <span asp-validation-for="ChoreWeight" class="text-danger"></span>
-                </div>
-                <button type="submit" class="btn btn-primary">Add A New Chore</button>
-            </form>
+    <div class="add">
+        <div class="row">
+            <div class="col-md-12">
+                <form method="post" asp-action="AddChores">
+                    <div asp-validation-summary="All" class="text-danger"></div>
+                    <div class="form-group">
+                        <label asp-for="ChoreDescription"></label>
+                        <input asp-for="ChoreDescription" class="form-control" />
+                        <span asp-validation-for="ChoreDescription" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="ChoreType"></label>
+                        <input asp-for="ChoreType" class="form-control" />
+                        <span asp-validation-for="ChoreType" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="ChoreWeight"></label>
+                        <input asp-for="ChoreWeight" class="form-control" />
+                        <span asp-validation-for="ChoreWeight" class="text-danger"></span>
+                    </div>
+                    <button type="submit" class="addBtn" >Add A New Chore</button>
+                </form>
+            </div>
         </div>
     </div>
-
 
 </body>
 </html>

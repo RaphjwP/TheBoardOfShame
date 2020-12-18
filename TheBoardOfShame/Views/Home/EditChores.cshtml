@@ -5,10 +5,11 @@
 <head>
     <title></title>
 </head>
-<body>
-    <p>Adding New Chores</p>
+<link rel="stylesheet" type="text/css" href="/css/edit.css" />
+<body class="editBG">
+    <p class="aeTitle">Adding New Chores</p>
 
-    <div>
+    <div class="edit">
         <div class="col-md-12">
             <form method="post" asp-action="EditChores">
                 <div asp-validation-summary="All" class="text-danger"></div>
@@ -27,7 +28,7 @@
                     <input asp-for="ChoreWeight" class="form-control" />
                     <span asp-validation-for="ChoreWeight" class="text-danger"></span>
                 </div>
-                <button type="submit" class="btn btn-primary">Register</button>
+                <button type="submit" class="editBtn">Register</button>
             </form>
         </div>
     </div>
