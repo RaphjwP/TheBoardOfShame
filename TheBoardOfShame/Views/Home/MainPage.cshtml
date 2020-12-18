@@ -13,7 +13,7 @@
         @foreach (var chore in Model.Chores)
         {
             <th>
-                <a>@chore.ChoreType</a>
+                <a asp-action ="GiveDetails">@chore.ChoreType</a>
             </th>
         }
 
@@ -23,7 +23,7 @@
     @foreach (var user in Model.Users)
     {
         <tr>
-            <td>@user.FirstName</td>
+            <td><a asp-action="GiveUsers">@user.FirstName</a></td>
         @foreach (var user1 in Model.Users)
         {
             <td>@user1.LastName</td>
