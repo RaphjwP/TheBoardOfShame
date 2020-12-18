@@ -1,10 +1,26 @@
 ﻿@model TheBoardOfShame.ViewModels.ChoreViewModel
 
 <html>
+<head>
+    <style>
+
+        div.b {
+            position: absolute;
+            right: 30px;
+            width: 100px;
+            height: 120px;
+            border: 3px solid blue;
+        } 
+
+    </style>
+</head>
 <body>
 <p class="alert alert-primary">The Chore Board</p>
-
-<table class="table table-striped" border ="1">
+<div>
+    <p>You are in : @Model.WeatherViewModel.currentLocation</p>
+    <p>Current Weather is : @Model.WeatherViewModel.Weather.description</p>
+</div>
+<table class="table table-striped" border="1">
 
     <thead>
 
@@ -13,7 +29,7 @@
         @foreach (var chore in Model.Chores)
         {
             <th>
-                <a asp-action ="GiveDetails">@chore.ChoreType</a>
+                <a asp-action="GiveDetails" asp-route-id="@chore.Id">@chore.ChoreType</a>
             </th>
         }
 
@@ -23,11 +39,11 @@
     @foreach (var user in Model.Users)
     {
         <tr>
-            <td><a asp-action="GiveUsers">@user.FirstName</a></td>
-        @foreach (var user1 in Model.Users)
-        {
-            <td>@user1.LastName</td>
-        }
+            <td><a asp-action="GiveUsers" asp-route-id="@user.Id">@user.FirstName</a></td>
+            @foreach (var user1 in Model.Users)
+            {
+                <td>@user1.LastName</td>
+            }
         </tr>
     }
 

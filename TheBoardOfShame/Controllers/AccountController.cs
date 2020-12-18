@@ -4,18 +4,22 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using TheBoardOfShame.Model;
 using TheBoardOfShame.ViewModels;
 
 namespace TheBoardOfShame.Controllers
 {
     public class AccountController : Microsoft.AspNetCore.Mvc.Controller
     {
-        private UserManager<IdentityUser> _userManager;
-        private SignInManager<IdentityUser> _signInManager;
+        private UserManager<User> _userManager;
+        private SignInManager<User> _signInManager;
 
-        public AccountController(UserManager<IdentityUser> userManager,
-            SignInManager<IdentityUser> signInManager)
+        private Database _database;
+
+        public AccountController(UserManager<User> userManager,
+            SignInManager<User> signInManager, Database database)
         {
+            _database = database;
             _userManager = userManager;
             _signInManager = signInManager;
         }
@@ -35,8 +39,6 @@ namespace TheBoardOfShame.Controllers
 
         public async Task<IActionResult> Logout()
         {
-
-            await _signInManager.SignOutAsync();
             return RedirectToAction("Index", "Home");
 
         }
@@ -46,18 +48,23 @@ namespace TheBoardOfShame.Controllers
         {
             if (ModelState.IsValid)
             {
-                var user = new IdentityUser
+                var user = new User
                 {
                     Email = model.Email,
-                    UserName = model.Email
+                    UserName = model.Email,
+                    Age = model.Age,
+                    FirstName = model.FirstName,
+                    LastName = model.LastName
                 };
 
                 var result = await _userManager.CreateAsync(user, model.Password);
+                _database.Add(user);
+                _database.SaveChanges();
 
                 if (result.Succeeded)
                 {
                     await _signInManager.SignInAsync(user, false);
-                    return RedirectToAction("Index", "Home");
+                    return RedirectToAction("MainPage", "Home");
                 }
 
                 foreach (var error in result.Errors)
@@ -69,6 +76,7 @@ namespace TheBoardOfShame.Controllers
         }
 
         [HttpPost]
+        [Route("Account/Login")]
         public async Task<IActionResult> Login(LoginViewModel model)
         {
             if (ModelState.IsValid)
@@ -77,10 +85,10 @@ namespace TheBoardOfShame.Controllers
 
                 if (result.Succeeded)
                 {
-                    return RedirectToAction("Index", "Home");
+                    return RedirectToAction("MainPage", "Home");
                 }
 
-                ModelState.AddModelError(string.Empty, "Invalid Login Attemp");
+                ModelState.AddModelError(string.Empty, "Invalid Login Attempt");
             }
             return View(model);
         }

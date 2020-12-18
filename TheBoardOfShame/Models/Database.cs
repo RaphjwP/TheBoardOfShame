@@ -18,12 +18,20 @@ namespace TheBoardOfShame.Model
         {
 
         }
-
         public DbSet<User> Users { get; set; }
 
         public DbSet<Chore> Chore { get; set; }
 
         public DbSet<Score> Scores { get; set; }
+
+        public DbSet<Role> Roles { get; set; }
+
+        protected override void OnModelCreating(ModelBuilder builder)
+        {
+            base.OnModelCreating(builder);
+
+
+        }
 
     }
 }

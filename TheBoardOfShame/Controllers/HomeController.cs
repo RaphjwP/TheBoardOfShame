@@ -12,23 +12,25 @@ namespace TheBoardOfShame.Controller
     public class HomeController : Microsoft.AspNetCore.Mvc.Controller
     {
         private Database _database;
+        private UserContext _context;
         private static WeatherViewModel _weatherViewModel;
 
         // Database Init
-        public HomeController(Database database)
+        public HomeController(Database database, UserContext context)
         {
             _database = database;
+            _context = context;
             _weatherViewModel = new WeatherViewModel();
         }
 
         public IActionResult Index()
         {
-            return View();
+            return RedirectToAction("Login", "Account");
         }
 
 
         // This is to test Weather API calls
-        public IActionResult WeatherView()
+        public IActionResult DisplayWeather()
         {
             return View("DisplayWeather",_weatherViewModel);
         }
@@ -66,7 +68,8 @@ namespace TheBoardOfShame.Controller
         {
             ChoreViewModel choreviewmodel = new ChoreViewModel();
             choreviewmodel.Chores = _database.Chore;
-            choreviewmodel.Users = _database.Users;
+            choreviewmodel.Users = _context.Users;
+            choreviewmodel.WeatherViewModel = _weatherViewModel;
 
             return View(choreviewmodel);
         }
@@ -95,7 +98,7 @@ namespace TheBoardOfShame.Controller
             return View("MainPage");
         }
 
-        [Route("Home/Details/{id}")]
+        [Route("Home/ChoreDetails/{id}")]
         public IActionResult GiveDetails(int id)
         {
             var chore = _database.Chore.Find(id);
@@ -103,7 +106,7 @@ namespace TheBoardOfShame.Controller
             return View(chore);
         }
 
-        [Route("Home/Details/{id}")]
+        [Route("Home/UserDetails/{id}")]
         public IActionResult GiveUsers(int id)
         {
             var user = _database.Users.Find(id);
