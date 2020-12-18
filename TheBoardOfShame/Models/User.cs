@@ -4,6 +4,8 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Mvc;
+using TheBoardOfShame.Models;
 
 namespace TheBoardOfShame.Model
 {
@@ -21,6 +23,9 @@ namespace TheBoardOfShame.Model
         public int Age { get; set; }
 
         public List<Chore> Chores { get; set; }
+
+        public List<Score> Scores { get; set; }
+
         [Required(ErrorMessage = "Please enter your Password")]
         public string Password { get; set; }
 
@@ -30,6 +35,7 @@ namespace TheBoardOfShame.Model
         public User()
         {
             Chores = new List<Chore>();
+            Scores = new List<Score>();
         }
     }
 

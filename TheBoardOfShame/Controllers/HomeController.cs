@@ -92,6 +92,14 @@ namespace TheBoardOfShame.Controller
             return View(chore);
         }
 
+        [Route("Home/Details/{id}")]
+        public IActionResult GiveUsers(int id)
+        {
+            var user = _database.Users.Find(id);
+
+            return View(user);
+        }
+
         [HttpGet]
         [Route("Home/Delete/{id}")]
         public IActionResult DeleteChores(int id)
