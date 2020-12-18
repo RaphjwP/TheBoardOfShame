@@ -10,8 +10,8 @@ using TheBoardOfShame.Models;
 namespace TheBoardOfShame.Migrations.User
 {
     [DbContext(typeof(UserContext))]
-    [Migration("20201218190334_AddSecondDb")]
-    partial class AddSecondDb
+    [Migration("20201218205858_usercontext")]
+    partial class usercontext
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {

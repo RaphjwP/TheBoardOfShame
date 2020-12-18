@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace TheBoardOfShame.Migrations.User
 {
-    public partial class AddSecondDb : Migration
+    public partial class usercontext : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {

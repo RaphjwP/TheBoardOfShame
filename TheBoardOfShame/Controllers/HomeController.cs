@@ -60,7 +60,7 @@ namespace TheBoardOfShame.Controller
             _database.Chore.Add(newChore);
             _database.SaveChanges();
 
-            return View("MainPage");
+            return RedirectToAction("MainPage");
         }
 
 
@@ -69,13 +69,12 @@ namespace TheBoardOfShame.Controller
         {
             ChoreViewModel choreviewmodel = new ChoreViewModel();
             choreviewmodel.Chores = _database.Chore;
-            var users = _database.Users;
+            var users = _context.Users;
             foreach (var user in users)
             {
                 user.Scores = _database.Scores.Where(s => s.User.Id == user.Id).ToList();
             }
-            choreviewmodel.Users = users;
-            
+
             choreviewmodel.Users = _context.Users;
             choreviewmodel.WeatherViewModel = _weatherViewModel;
 
@@ -103,7 +102,7 @@ namespace TheBoardOfShame.Controller
             _database.Chore.Update(choreToChange);
             _database.SaveChanges();
 
-            return View("MainPage");
+            return RedirectToAction("MainPage");
         }
 
         [Route("Home/GiveDetails/{id}")]
@@ -138,7 +137,7 @@ namespace TheBoardOfShame.Controller
             _database.Chore.Remove(chore);
             _database.SaveChanges();
 
-            return View("MainPage");
+            return RedirectToAction("MainPage");
         }
     }
 }

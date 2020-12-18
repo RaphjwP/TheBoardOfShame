@@ -10,8 +10,8 @@ using TheBoardOfShame.Model;
 namespace TheBoardOfShame.Migrations
 {
     [DbContext(typeof(Database))]
-    [Migration("20201218190317_ReInitDB")]
-    partial class ReInitDB
+    [Migration("20201218211318_ReinitChange")]
+    partial class ReinitChange
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -26,8 +26,8 @@ namespace TheBoardOfShame.Migrations
                     b.Property<int>("ChoresId")
                         .HasColumnType("int");
 
-                    b.Property<string>("UsersId")
-                        .HasColumnType("nvarchar(450)");
+                    b.Property<int>("UsersId")
+                        .HasColumnType("int");
 
                     b.HasKey("ChoresId", "UsersId");
 
@@ -59,8 +59,10 @@ namespace TheBoardOfShame.Migrations
 
             modelBuilder.Entity("TheBoardOfShame.Model.User", b =>
                 {
-                    b.Property<string>("Id")
-                        .HasColumnType("nvarchar(450)");
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .UseIdentityColumn();
 
                     b.Property<int>("AccessFailedCount")
                         .HasColumnType("int");
@@ -140,13 +142,18 @@ namespace TheBoardOfShame.Migrations
                         .HasColumnType("int")
                         .UseIdentityColumn();
 
+                    b.Property<int?>("ChoreId")
+                        .HasColumnType("int");
+
                     b.Property<int>("ChoreScore")
                         .HasColumnType("int");
 
-                    b.Property<string>("UserId")
-                        .HasColumnType("nvarchar(450)");
+                    b.Property<int?>("UserId")
+                        .HasColumnType("int");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("ChoreId");
 
                     b.HasIndex("UserId");
 
@@ -170,9 +177,17 @@ namespace TheBoardOfShame.Migrations
 
             modelBuilder.Entity("TheBoardOfShame.Models.Score", b =>
                 {
-                    b.HasOne("TheBoardOfShame.Model.User", null)
+                    b.HasOne("TheBoardOfShame.Model.Chore", "Chore")
+                        .WithMany()
+                        .HasForeignKey("ChoreId");
+
+                    b.HasOne("TheBoardOfShame.Model.User", "User")
                         .WithMany("Scores")
                         .HasForeignKey("UserId");
+
+                    b.Navigation("Chore");
+
+                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("TheBoardOfShame.Model.User", b =>

@@ -14,7 +14,7 @@
 
     <p>Chore Weighting : @Model.ChoreWeight</p>
 
-    <a asp-action="EditChores">Edit This Chore</a>
-    <a asp-action="DeleteChores">Delete This Chore</a>
+    <a asp-action="EditChores" asp-route-Id="@Model.Id">Edit This Chore</a>
+    <a asp-action="DeleteChores" asp-route-Id="@Model.Id">Delete This Chore</a>
 </body>
 </html>

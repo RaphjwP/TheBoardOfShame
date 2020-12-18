@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace TheBoardOfShame.Migrations
 {
-    public partial class ReInitDB : Migration
+    public partial class Reinit : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -39,7 +39,8 @@ namespace TheBoardOfShame.Migrations
                 name: "Users",
                 columns: table => new
                 {
-                    Id = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
                     FirstName = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     LastName = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Age = table.Column<int>(type: "int", nullable: false),
@@ -68,7 +69,7 @@ namespace TheBoardOfShame.Migrations
                 columns: table => new
                 {
                     ChoresId = table.Column<int>(type: "int", nullable: false),
-                    UsersId = table.Column<string>(type: "nvarchar(450)", nullable: false)
+                    UsersId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -93,12 +94,19 @@ namespace TheBoardOfShame.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    ChoreScore = table.Column<int>(type: "int", nullable: false),
-                    UserId = table.Column<string>(type: "nvarchar(450)", nullable: true)
+                    UserId = table.Column<int>(type: "int", nullable: true),
+                    ChoreId = table.Column<int>(type: "int", nullable: true),
+                    ChoreScore = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Scores", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Scores_Chore_ChoreId",
+                        column: x => x.ChoreId,
+                        principalTable: "Chore",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
                         name: "FK_Scores_Users_UserId",
                         column: x => x.UserId,
@@ -111,6 +119,11 @@ namespace TheBoardOfShame.Migrations
                 name: "IX_ChoreUser_UsersId",
                 table: "ChoreUser",
                 column: "UsersId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Scores_ChoreId",
+                table: "Scores",
+                column: "ChoreId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Scores_UserId",
