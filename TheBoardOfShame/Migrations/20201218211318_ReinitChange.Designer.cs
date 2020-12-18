@@ -10,8 +10,8 @@ using TheBoardOfShame.Model;
 namespace TheBoardOfShame.Migrations
 {
     [DbContext(typeof(Database))]
-    [Migration("20201217191318_UserIdentity")]
-    partial class UserIdentity
+    [Migration("20201218211318_ReinitChange")]
+    partial class ReinitChange
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -43,6 +43,15 @@ namespace TheBoardOfShame.Migrations
                         .HasColumnType("int")
                         .UseIdentityColumn();
 
+                    b.Property<string>("ChoreDescription")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("ChoreType")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("ChoreWeight")
+                        .HasColumnType("int");
+
                     b.HasKey("Id");
 
                     b.ToTable("Chore");
@@ -65,18 +74,15 @@ namespace TheBoardOfShame.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Email")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<bool>("EmailConfirmed")
                         .HasColumnType("bit");
 
                     b.Property<string>("FirstName")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("LastName")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<bool>("LockoutEnabled")
@@ -89,10 +95,6 @@ namespace TheBoardOfShame.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("NormalizedUserName")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Password")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("PasswordHash")
@@ -118,6 +120,46 @@ namespace TheBoardOfShame.Migrations
                     b.ToTable("Users");
                 });
 
+            modelBuilder.Entity("TheBoardOfShame.Models.Role", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .UseIdentityColumn();
+
+                    b.Property<string>("Name")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Roles");
+                });
+
+            modelBuilder.Entity("TheBoardOfShame.Models.Score", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .UseIdentityColumn();
+
+                    b.Property<int?>("ChoreId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("ChoreScore")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("UserId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ChoreId");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("Scores");
+                });
+
             modelBuilder.Entity("ChoreUser", b =>
                 {
                     b.HasOne("TheBoardOfShame.Model.Chore", null)
@@ -131,6 +173,26 @@ namespace TheBoardOfShame.Migrations
                         .HasForeignKey("UsersId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+                });
+
+            modelBuilder.Entity("TheBoardOfShame.Models.Score", b =>
+                {
+                    b.HasOne("TheBoardOfShame.Model.Chore", "Chore")
+                        .WithMany()
+                        .HasForeignKey("ChoreId");
+
+                    b.HasOne("TheBoardOfShame.Model.User", "User")
+                        .WithMany("Scores")
+                        .HasForeignKey("UserId");
+
+                    b.Navigation("Chore");
+
+                    b.Navigation("User");
+                });
+
+            modelBuilder.Entity("TheBoardOfShame.Model.User", b =>
+                {
+                    b.Navigation("Scores");
                 });
 #pragma warning restore 612, 618
         }

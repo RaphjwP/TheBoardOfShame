@@ -1,4 +1,4 @@
-﻿
+﻿@model TheBoardOfShame.ViewModels.LoginViewModel
 @{
     ViewData["Title"] = "Login page";
 }
@@ -8,23 +8,31 @@
     <title>Login</title>
     <link rel="stylesheet" type="text/css" href="/css/site.css" />
     <body class="bodyLogin">
-    <div class="login">
-        <img src="~/loginDude.png" class="dudes">
-        <h1 class="loginSignUpH1">
-            Login
-        </h1>
-        <form>
-            <p>
-                Username
-            </p>
-            <input type="text" name="" placeholder="Enter Username">
-            <p>
-                Password
-            </p>
-            <input type="password" name="" placeholder="Enter Password">
-            <input type="submit" name="" value="Login">
-        </form>
-    </div>
+        <div class="login">
+            <img src="~/loginDude.png" class="dudes">
+            <h1>
+                Login
+            </h1>
+            <p>@ViewBag.ErrorMsg</p>
+            <form method="post" asp-action="Login">
+                <p>
+                    Username
+                </p>
+                <div>
+                    <input type="text" name="" asp-for="Email" placeholder="Enter Username">
+                    <span asp-validation-for="Email" class="text-danger"></span>
+                </div>
+
+                <p>
+                    Password
+                </p>
+                <div>
+                    <input type="password" name="" asp-for="Password" placeholder="Enter Password">
+                    <span asp-validation-for="Password" class="text-danger"></span>
+                </div>
+                <input type="submit" name="" value="Login">
+            </form>
+        </div>
     </body>
 </head>
 </html>

@@ -24,17 +24,14 @@ namespace TheBoardOfShame.Model
             {
                 context.Users.AddRange(new User
                     {
-                        FirstName = "Jae", LastName = "Park", Email = "parjaewo@sheridancollege.ca",
-                        Password = "abcd1234", Age = 24
+                        FirstName = "Jae", LastName = "Park", Email = "parjaewo@sheridancollege.ca", Age = 24
                     },
                     new User
                     {
-                        FirstName = "Mike", LastName = "Komor", Email = "komormi@sheridancollege.ca",
-                        Password = "aabbcc12", Age = 27
+                        FirstName = "Mike", LastName = "Komor", Email = "komormi@sheridancollege.ca", Age = 27
                     }, new User
                     {
                         FirstName = "Scott", LastName = "McGhie", Email = "mcghiesc@sheridancollege.ca",
-                        Password = "1234abcd"
                     });
                 context.SaveChanges();
             }

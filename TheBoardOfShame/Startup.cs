@@ -11,6 +11,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using TheBoardOfShame.Model;
+using TheBoardOfShame.Models;
 
 namespace TheBoardOfShame
 {
@@ -34,7 +35,13 @@ namespace TheBoardOfShame
                 opts.UseSqlServer(
                     Configuration["ConnectionStrings:BoardOfShameDBConnection"]);
             });
-            services.AddIdentity<IdentityUser, IdentityRole>().AddEntityFrameworkStores<Database>();
+
+            services.AddDbContext<UserContext>(opts =>
+            {
+                opts.UseSqlServer(
+                    Configuration["ConnectionStrings:UserBoardOfShameDBConnection"]);
+            });
+            services.AddIdentity<User, IdentityRole>().AddEntityFrameworkStores<UserContext>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -56,7 +63,7 @@ namespace TheBoardOfShame
                 endpoints.MapDefaultControllerRoute();
             });
 
-            SeedData.EnsurePopulated(app);
+            //SeedData.EnsurePopulated(app);
         }
     }
 }

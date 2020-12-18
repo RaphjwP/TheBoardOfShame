@@ -1,38 +1,84 @@
-﻿@model TheBoardOfShame.ViewModels.ChoreViewModel
+﻿<!-- created by Scott. Presents the list of chores, a list of users and the scores for each chore for each user -->
+@model TheBoardOfShame.ViewModels.ChoreViewModel
+<!DOCTYPE html>
+<head>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="~/css/site.css" />
+    <style>
+        body {
+            background-image: url('https://cdn.hipwallpaper.com/i/44/90/yvxDu0.jpg');
+            background-repeat: no-repeat;
+            background-size: auto;
+            color: #b7cbeb;
+        }
+
+        a {
+            color: #7e8eab;
+        }
+
+        p {
+            background-color: #8aa5cf;
+            font-size: 25px;
+            color: #e8f1ff;
+        }
+
+        tr {
+            border-radius: 10px;
+        }
+    </style>
+</head>
+
 
 <html>
+<head>
+    <style>
+
+        div.b {
+            position: absolute;
+            right: 30px;
+            width: 100px;
+            height: 120px;
+            border: 3px solid blue;
+        } 
+
+    </style>
+</head>
 <body>
 <p class="alert alert-primary">The Chore Board</p>
+<div>
+    <p>You are in : @Model.WeatherViewModel.currentLocation</p>
+    <p>Current Weather is : @Model.WeatherViewModel.Weather.description</p>
+</div>
+<table class="table table-striped" border="1">
 
-<table class="table table-striped" border ="1">
+    <table class="table table-striped table-dark border="1">
+        <thead>
 
-    <thead>
+            <tr>
+                <th></th>
+                @foreach (var chore in Model.Chores)
+                {
+                    <th>
+                        <a asp-action="GiveDetails" asp-route-Id="@chore.Id">@chore.ChoreType</a>
+                    </th>
+                }
 
-    <tr>
-        <th></th>
-        @foreach (var chore in Model.Chores)
-        {
-            <th>
-                <a asp-action ="GiveDetails">@chore.ChoreType</a>
-            </th>
-        }
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var user in Model.Users)
+            {
+                <tr>
+                    <td><a asp-action="GiveUsers" asp-route-Id="@user.Id">@user.FirstName</a></td>
+                    @foreach (var usera in user.Scores)
+                    {
+                        <td>@usera.ChoreScore</td>
+                    }
+                </tr>
+            }
 
-    </tr>
-    </thead>
-    <tbody>
-    @foreach (var user in Model.Users)
-    {
-        <tr>
-            <td><a asp-action="GiveUsers">@user.FirstName</a></td>
-        @foreach (var user1 in Model.Users)
-        {
-            <td>@user1.LastName</td>
-        }
-        </tr>
-    }
-
-    </tbody>
-</table>
+        </tbody>
+    </table>
 
 </body>
 </html>

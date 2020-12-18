@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using TheBoardOfShame.Model;
 using TheBoardOfShame.Models;
 using TheBoardOfShame.ViewModels;
@@ -12,23 +13,25 @@ namespace TheBoardOfShame.Controller
     public class HomeController : Microsoft.AspNetCore.Mvc.Controller
     {
         private Database _database;
+        private UserContext _context;
         private static WeatherViewModel _weatherViewModel;
 
         // Database Init
-        public HomeController(Database database)
+        public HomeController(Database database, UserContext context)
         {
             _database = database;
+            _context = context;
             _weatherViewModel = new WeatherViewModel();
         }
 
         public IActionResult Index()
         {
-            return View("add");
+            return RedirectToAction("Login", "Account");
         }
 
 
         // This is to test Weather API calls
-        public IActionResult WeatherView()
+        public IActionResult DisplayWeather()
         {
             return View("DisplayWeather",_weatherViewModel);
         }
@@ -57,7 +60,7 @@ namespace TheBoardOfShame.Controller
             _database.Chore.Add(newChore);
             _database.SaveChanges();
 
-            return View("MainPage");
+            return RedirectToAction("MainPage");
         }
 
 
@@ -66,7 +69,14 @@ namespace TheBoardOfShame.Controller
         {
             ChoreViewModel choreviewmodel = new ChoreViewModel();
             choreviewmodel.Chores = _database.Chore;
-            choreviewmodel.Users = _database.Users;
+            var users = _context.Users;
+            foreach (var user in users)
+            {
+                user.Scores = _database.Scores.Where(s => s.User.Id == user.Id).ToList();
+            }
+
+            choreviewmodel.Users = _context.Users;
+            choreviewmodel.WeatherViewModel = _weatherViewModel;
 
             return View(choreviewmodel);
         }
@@ -92,18 +102,18 @@ namespace TheBoardOfShame.Controller
             _database.Chore.Update(choreToChange);
             _database.SaveChanges();
 
-            return View("MainPage");
+            return RedirectToAction("MainPage");
         }
 
-        [Route("Home/Details/{id}")]
+        [Route("Home/GiveDetails/{id}")]
         public IActionResult GiveDetails(int id)
         {
             var chore = _database.Chore.Find(id);
 
             return View(chore);
         }
-
-        [Route("Home/Details/{id}")]
+        [HttpGet]
+        [Route("Home/GiveUsers/{id}")]
         public IActionResult GiveUsers(int id)
         {
             var user = _database.Users.Find(id);
@@ -127,7 +137,7 @@ namespace TheBoardOfShame.Controller
             _database.Chore.Remove(chore);
             _database.SaveChanges();
 
-            return View("MainPage");
+            return RedirectToAction("MainPage");
         }
     }
 }

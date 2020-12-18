@@ -2,7 +2,7 @@
 
 namespace TheBoardOfShame.Migrations
 {
-    public partial class BoardofShameDB_Re : Migration
+    public partial class ReinitChange : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
