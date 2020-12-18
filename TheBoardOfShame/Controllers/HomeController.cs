@@ -134,7 +134,8 @@ namespace TheBoardOfShame.Controller
         [Route("Home/Delete/{id}")]
         public IActionResult DeleteChores(Chore chore)
         {
-            _database.Chore.Remove(chore);
+            var choreDelete = _database.Chore.Find(chore.Id);
+            _database.Chore.Remove(choreDelete);
             _database.SaveChanges();
 
             return RedirectToAction("MainPage");

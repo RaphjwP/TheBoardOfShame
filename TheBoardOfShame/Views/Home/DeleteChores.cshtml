@@ -4,8 +4,8 @@
     <title></title>
 </head>
 <link rel="stylesheet" type="text/css" href="/css/delete.css" />
-<body class="delete">
-    <div>
+<body class="deleteBg">
+    <div class="delete">
         <p class="deleteTitle">Showing the details of the chore </p>
 
         <p>Name of Chore: @Model.ChoreType</p>
@@ -13,11 +13,13 @@
         <p>Description of Chore: @Model.ChoreDescription</p>
 
         <p>Chore Weighting : @Model.ChoreWeight</p>
+
+        <form method="post" asp-action="DeleteChores">
+            <button type="submit" class="deleteBtn">Confirm Delete</button>
+        </form>
     </div>
 
-    <form method="post" asp-action="DeleteChores">
-        <button type="submit" class="deleteBtn">Confirm Delete</button>
-    </form>
+    
 
 </body>
 </html>

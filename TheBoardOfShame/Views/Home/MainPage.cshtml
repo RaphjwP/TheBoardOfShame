@@ -1,4 +1,5 @@
 ﻿<!-- created by Scott. Presents the list of chores, a list of users and the scores for each chore for each user -->
+@using TheBoardOfShame.Model
 @model TheBoardOfShame.ViewModels.ChoreViewModel
 <!DOCTYPE html>
 <head>
@@ -79,6 +80,6 @@
 
         </tbody>
     </table>
-
+    <a asp-action="AddChores"> Add a New Chore</a>
 </body>
 </html>

@@ -8,12 +8,14 @@
 <link rel="stylesheet" type="text/css" href="/css/giveDetails.css" />
 <body class="giveDetailsBg">
     <p class="giveDetailsTitle">Showing the details of the chore </p>
-
+<div class="giveDetailsgggg">
     <p>Name of Chore: @Model.ChoreType</p>
 
     <p>Description of Chore: @Model.ChoreDescription</p>
 
     <p>Chore Weighting : @Model.ChoreWeight</p>
+</div>
+
 
     <a class="giveDetailsBtn" asp-action="EditChores" asp-route-Id="@Model.Id">Edit This Chore</a>
     <a class="giveDetailsBtn" asp-action="DeleteChores" asp-route-Id="@Model.Id">Delete This Chore</a>
