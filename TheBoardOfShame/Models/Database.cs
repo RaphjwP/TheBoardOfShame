@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
+using TheBoardOfShame.Model;
 using TheBoardOfShame.Models;
 
 namespace TheBoardOfShame.Model
@@ -24,6 +25,7 @@ namespace TheBoardOfShame.Model
         public DbSet<Chore> Chore { get; set; }
 
         public DbSet<Score> Scores { get; set; }
+
 
     }
 }

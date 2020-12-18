@@ -84,14 +84,14 @@ namespace TheBoardOfShame.Controller
             return View("MainPage");
         }
 
-        [Route("Home/Details/{id}")]
+        [Route("Home/GiveDetails/{id}")]
         public IActionResult GiveDetails(int id)
         {
             var chore = _database.Chore.Find(id);
 
             return View(chore);
         }
-
+        [HttpGet]
         [Route("Home/Details/{id}")]
         public IActionResult GiveUsers(int id)
         {

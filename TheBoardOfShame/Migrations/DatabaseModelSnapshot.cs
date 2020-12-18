@@ -125,6 +125,31 @@ namespace TheBoardOfShame.Migrations
                     b.ToTable("Users");
                 });
 
+            modelBuilder.Entity("TheBoardOfShame.Models.Score", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .UseIdentityColumn();
+
+                    b.Property<int?>("ChoreId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("ChoreScore")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("UserId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ChoreId");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("Scores");
+                });
+
             modelBuilder.Entity("ChoreUser", b =>
                 {
                     b.HasOne("TheBoardOfShame.Model.Chore", null)
@@ -138,6 +163,26 @@ namespace TheBoardOfShame.Migrations
                         .HasForeignKey("UsersId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+                });
+
+            modelBuilder.Entity("TheBoardOfShame.Models.Score", b =>
+                {
+                    b.HasOne("TheBoardOfShame.Model.Chore", "Chore")
+                        .WithMany()
+                        .HasForeignKey("ChoreId");
+
+                    b.HasOne("TheBoardOfShame.Model.User", "User")
+                        .WithMany("Scores")
+                        .HasForeignKey("UserId");
+
+                    b.Navigation("Chore");
+
+                    b.Navigation("User");
+                });
+
+            modelBuilder.Entity("TheBoardOfShame.Model.User", b =>
+                {
+                    b.Navigation("Scores");
                 });
 #pragma warning restore 612, 618
         }
