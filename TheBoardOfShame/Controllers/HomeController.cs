@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using TheBoardOfShame.Model;
+using TheBoardOfShame.Models;
 using TheBoardOfShame.ViewModels;
 
 namespace TheBoardOfShame.Controller
@@ -11,10 +12,12 @@ namespace TheBoardOfShame.Controller
     public class HomeController : Microsoft.AspNetCore.Mvc.Controller
     {
         private Database _database;
+        private WeatherViewModel _weatherViewModel;
 
         public HomeController(Database database)
         {
             _database = database;
+            _weatherViewModel = new WeatherViewModel();
         }
 
         public IActionResult Index()
