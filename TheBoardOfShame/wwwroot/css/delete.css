@@ -12,7 +12,7 @@
     border-radius: 10px;
 }
 
-.bG {
+.deleteBg {
     margin: 0;
     padding: 0;
     background: url('../bg2.jpg');
@@ -21,7 +21,7 @@
 }
 
 
-.title {
+.deleteTitle {
     margin: 0;
     padding: 0 0 20px;
     font-weight: bold;
@@ -30,7 +30,7 @@
     color: #ffffff;
 }
 
-.btn{
+.deleteBtn {
     color: #a5a0a0;
     font-weight: bold;
     font-size: 20px;

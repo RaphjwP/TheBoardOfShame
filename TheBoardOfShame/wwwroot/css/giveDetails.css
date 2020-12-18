@@ -12,7 +12,7 @@
     border-radius: 10px;
 }
 
-.bG {
+.giveDetailsBg {
     margin: 0;
     padding: 0;
     background: url('../bg2.jpg');
@@ -21,7 +21,7 @@
 }
 
 
-.title {
+.giveDetailsTitle {
     margin: 0;
     padding: 0 0 20px;
     font-weight: bold;
@@ -30,7 +30,7 @@
     color: #ffffff;
 }
 
-.Btn{
+.giveDetailsBtn {
     color: #a5a0a0;
     font-weight: bold;
     font-size: 20px;
